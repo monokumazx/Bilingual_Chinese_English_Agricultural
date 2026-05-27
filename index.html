@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>农业术语 · Agricultural Terms | 中英双语对照</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f5f7f2;
+      font-family: 'Segoe UI', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+      color: #2a3820;
+      line-height: 1.5;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 2.5rem;
+      box-shadow: 0 20px 40px rgba(30, 40, 20, 0.08);
+      padding: 2.2rem 2.2rem 2.8rem;
+      border: 1px solid #e2ecda;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 480;
+      letter-spacing: -0.3px;
+      color: #1d3314;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      margin-bottom: 0.1rem;
+      border-bottom: 2px solid #d2e2c4;
+      padding-bottom: 1rem;
+    }
+    h1 span.english-title {
+      font-size: 1.9rem;
+      font-weight: 330;
+      color: #5e7250;
+    }
+    .subhead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 1.6rem 0 1.8rem;
+      color: #445535;
+      background: #fafdf7;
+      padding: 0.7rem 1.3rem;
+      border-radius: 3rem;
+      border: 1px solid #d8e8cc;
+      font-weight: 420;
+    }
+    .search-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: white;
+      border-radius: 2.5rem;
+      padding: 0.2rem 0.2rem 0.2rem 1.2rem;
+      border: 1px solid #c5d8b2;
+    }
+    .search-wrapper input {
+      border: none;
+      background: transparent;
+      font-size: 0.95rem;
+      width: 180px;
+      outline: none;
+      color: #1e2e13;
+    }
+    .search-wrapper input::placeholder {
+      color: #8ba179;
+      font-weight: 300;
+    }
+    .search-wrapper button {
+      background: #ecf3e5;
+      border: none;
+      border-radius: 2rem;
+      padding: 0.4rem 1.2rem;
+      cursor: pointer;
+      color: #2f461f;
+      font-weight: 500;
+      transition: 0.2s;
+      border: 1px solid transparent;
+    }
+    .search-wrapper button:hover {
+      background: #d9e7cc;
+      border-color: #adc196;
+    }
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.6rem 0 2rem;
+    }
+    .category-btn {
+      background: #ffffff;
+      border: 1px solid #cbdbbc;
+      color: #324b20;
+      padding: 0.45rem 1.3rem;
+      border-radius: 2.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #fbfdf9;
+      white-space: nowrap;
+    }
+    .category-btn:hover {
+      background: #e2efd5;
+      border-color: #98b37b;
+    }
+    .category-btn.active {
+      background: #2b4619;
+      border-color: #1b2f0e;
+      color: white;
+      font-weight: 500;
+    }
+    .category-desc-box {
+      background: #f2f8ed;
+      border-left: 6px solid #7e9b64;
+      border-radius: 1.2rem;
+      padding: 1rem 1.5rem;
+      margin: 1rem 0 1.8rem;
+      color: #2e4021;
+      font-size: 0.95rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.8rem 1.5rem;
+      border: 1px solid #d7e7c7;
+    }
+    .desc-chinese {
+      font-weight: 550;
+      background: #ffffffd0;
+      padding: 0.2rem 1rem;
+      border-radius: 2rem;
+    }
+    .desc-english {
+      font-style: italic;
+      color: #4b6040;
+      font-weight: 380;
+    }
+    .term-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+    .term-card {
+      background: #ffffff;
+      border: 1px solid #e1ebd6;
+      border-radius: 1.5rem;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: background 0.2s, border-color 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+    }
+    .term-card:hover {
+      background: #f9fdf5;
+      border-color: #b5cf9b;
+    }
+    .term-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.7rem 1rem;
+    }
+    .chinese-block {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 100px;
+    }
+    .chinese-term {
+      font-size: 1.35rem;
+      font-weight: 580;
+      color: #1b3313;
+      letter-spacing: 0.3px;
+    }
+    .pinyin-text {
+      font-size: 0.7rem;
+      font-weight: 350;
+      color: #6e7e5e;
+      background: #f4f9ef;
+      padding: 0.1rem 0.7rem;
+      border-radius: 1rem;
+      margin-top: 0.2rem;
+      letter-spacing: 0.2px;
+      border: 1px solid #dfecd2;
+      display: inline-block;
+    }
+    .english-term {
+      font-size: 1.05rem;
+      font-weight: 480;
+      color: #273918;
+      background: #f0f6ea;
+      padding: 0.2rem 1rem;
+      border-radius: 1.3rem;
+      border: 1px solid #d4e3c4;
+      white-space: nowrap;
+    }
+    .descriptions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-left: 0.3rem;
+      font-size: 0.9rem;
+    }
+    .desc-zh {
+      color: #2e4021;
+      font-weight: 450;
+    }
+    .desc-en {
+      color: #536544;
+      font-weight: 350;
+      font-style: italic;
+      padding-left: 0.7rem;
+      border-left: 3px solid #c9dbbc;
+    }
+    .category-badge {
+      font-size: 0.7rem;
+      background: #eaf2e2;
+      color: #3f5629;
+      padding: 0.2rem 0.9rem;
+      border-radius: 1.5rem;
+      white-space: nowrap;
+      font-weight: 450;
+      border: 1px solid #cfe0bc;
+      margin-left: 0.4rem;
+      align-self: center;
+    }
+    .no-results {
+      text-align: center;
+      padding: 2.5rem;
+      color: #7e8f6b;
+      font-style: italic;
+      background: #fafdf8;
+      border-radius: 2rem;
+    }
+    @media (max-width: 650px) {
+      body { padding: 1rem 0.4rem; }
+      .container { padding: 1.5rem 1rem; }
+      .term-header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>农业术语 <span class="english-title">Agricultural Terms</span></h1>
+  <div class="subhead">
+    <span>🌾 中英对照 · 现实农业词汇 Bilingual Real‑World Agriculture</span>
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" placeholder="搜索中文/拼音/英文..." autocomplete="off">
+      <button id="clearSearchBtn">清除</button>
+    </div>
+  </div>
+
+  <div class="categories" id="categoryContainer">
+    <button class="category-btn active" data-category="all">🌍 全部 All</button>
+    <button class="category-btn" data-category="牧场">🏞️ 牧场 Pasture</button>
+    <button class="category-btn" data-category="农场">🚜 农场 Farm</button>
+    <button class="category-btn" data-category="土壤">🌱 土壤 Soil</button>
+    <button class="category-btn" data-category="作物">🌽 作物 Crops</button>
+    <button class="category-btn" data-category="灌溉">💧 灌溉 Irrigation</button>
+    <button class="category-btn" data-category="机械">⚙️ 机械 Machinery</button>
+    <button class="category-btn" data-category="畜牧">🐄 畜牧 Livestock</button>
+    <button class="category-btn" data-category="加工">🏭 加工 Processing</button>
+    <button class="category-btn" data-category="经济">📊 经济 Economy</button>
+    <button class="category-btn" data-category="植物保护">🌿 植物保护 Plant Protection</button>
+    <button class="category-btn" data-category="可持续农业">🌍 可持续农业 Sustainable Ag.</button>
+    <button class="category-btn" data-category="水产养殖">🐟 水产养殖 Aquaculture</button>
+  </div>
+
+  <div id="categoryDescription" class="category-desc-box">
+    <span class="desc-chinese">🌿 全部类别 · 现实农业综合术语</span>
+    <span class="desc-english">All categories · Comprehensive real‑world agricultural vocabulary</span>
+  </div>
+
+  <div id="termsContainer" class="term-grid"></div>
+</div>
+
+<script>
+  (function() {
+    // ---------- CATEGORY DESCRIPTIONS ----------
+    const categoryDescriptions = {
+      all: {
+        zh: "🌿 全部类别 · 现实农业综合术语",
+        en: "All categories · Comprehensive real‑world agricultural vocabulary"
+      },
+      "牧场": {
+        zh: "🐂 牧场：从“牛”字旁，意指放养牲畜的广阔土地。包含牧羊人、放牧、挤奶等词汇。",
+        en: "Pasture / Ranch: radical '牛' (cow) implies land for grazing livestock. Includes shepherd, grazing, milking parlor, etc."
+      },
+      "农场": {
+        zh: "🌾 农场：从事农作物种植与农业生产的基础单位，涵盖耕地、轮作、有机农业等。",
+        en: "Farm: basic unit of crop cultivation & agricultural production. Covers tillage, crop rotation, organic farming, etc."
+      },
+      "土壤": {
+        zh: "🌱 土壤：农业的根基。包含土壤肥力、堆肥、免耕等术语。",
+        en: "Soil: the foundation of farming. Includes soil fertility, compost, no‑till farming, etc."
+      },
+      "作物": {
+        zh: "🌽 作物科学：关于我们种植的谷物、豆类、经济作物及遗传改良。",
+        en: "Crop Science: cereals, legumes, cash crops, GMOs, heirloom varieties."
+      },
+      "灌溉": {
+        zh: "💧 灌溉与水资源：滴灌、喷灌、水权等水资源管理术语。",
+        en: "Irrigation & Water: drip irrigation, water rights, drought, watershed."
+      },
+      "机械": {
+        zh: "⚙️ 农业机械与技术：从拖拉机到无人机、卫星图像的现代工具。",
+        en: "Machinery & Technology: tractors, drones, auto‑steering, precision agriculture."
+      },
+      "畜牧": {
+        zh: "🐄 畜牧生产：育种、人工授精、体况评分、生物安全等专业养殖术语。",
+        en: "Livestock Production: breeding, AI, body condition score, biosecurity."
+      },
+      "加工": {
+        zh: "🏭 收获后与加工：干燥、储藏、冷链、碾磨等产后处理。",
+        en: "Post‑Harvest & Processing: drying, storage, cold chain, milling."
+      },
+      "经济": {
+        zh: "📊 经济、政策与贸易：补贴、期货、合作社、关税等市场体系。",
+        en: "Economy & Policy: subsidies, futures, cooperatives, tariffs."
+      },
+      "植物保护": {
+        zh: "🌿 植物保护：防治病虫草害的农药与综合管理策略。",
+        en: "Plant Protection: pesticides, fungicides, integrated pest management (IPM)."
+      },
+      "可持续农业": {
+        zh: "🌍 可持续农业与生态：再生农业、碳封存、农林复合等环境友好实践。",
+        en: "Sustainable Agriculture & Ecology: regenerative agriculture, carbon sequestration, agroforestry."
+      },
+      "水产养殖": {
+        zh: "🐟 水产养殖：鱼类、虾类、贝类及水生植物的受控养殖。",
+        en: "Aquaculture: farming of fish, crustaceans, mollusks, aquatic plants."
+      }
+    };
+
+    // ---------- COMPLETE AGRICULTURAL TERMS (with Chinese and English descriptions) ----------
+    const agriculturalTerms = [
+      // 牧场 (10 terms)
+      { chinese: "牧场", pinyin: "mù chǎng", english: "Pasture / Ranch", descZh: "用于放牧牲畜的大片土地，常指草原或围栏草场。", descEn: "Large area of land used for grazing livestock, often grassland or fenced range.", category: "牧场" },
+      { chinese: "牧羊人", pinyin: "mù yáng rén", english: "Shepherd", descZh: "负责放牧、看护和管理羊群的人。", descEn: "A person who herds, tends, and guards sheep.", category: "牧场" },
+      { chinese: "放牧", pinyin: "fàng mù", english: "Grazing", descZh: "让牲畜在草地上采食的饲养方式。", descEn: "The act of allowing livestock to feed on pasture vegetation.", category: "牧场" },
+      { chinese: "牲畜", pinyin: "shēng chù", english: "Livestock", descZh: "为农业用途而驯养的各种动物的统称。", descEn: "Domesticated animals raised for agricultural purposes.", category: "牧场" },
+      { chinese: "反刍", pinyin: "fǎn chú", english: "Rumination", descZh: "牛羊等动物将吞下的食物返回口中再次咀嚼的消化过程。", descEn: "Digestive process where cattle/sheep regurgitate food and chew it again.", category: "牧场" },
+      { chinese: "挤奶厅", pinyin: "jǐ nǎi tīng", english: "Milking Parlor", descZh: "配备挤奶设备的专用场所，用于高效获取牛奶。", descEn: "A specialized facility equipped for mechanical milking of cows.", category: "牧场" },
+      { chinese: "育肥场", pinyin: "yù féi chǎng", english: "Feedlot", descZh: "在屠宰前对牲畜进行集中高能量饲料喂养的场地。", descEn: "Confined area for finishing livestock on high‑energy feed before slaughter.", category: "牧场" },
+      { chinese: "散养", pinyin: "sǎn yǎng", english: "Free-range", descZh: "允许家禽或牲畜在开放环境中自由活动，而非笼养。", descEn: "A system where poultry/livestock can roam freely outdoors.", category: "牧场" },
+      { chinese: "载畜率", pinyin: "zài chù lǜ", english: "Stocking Rate", descZh: "单位面积牧场上放牧牲畜的数量。", descEn: "The number of livestock grazing on a unit area of pasture.", category: "牧场" },
+      { chinese: "轮牧", pinyin: "lún mù", english: "Rotational Grazing", descZh: "将牧场划分为若干小区，按顺序轮流放牧的管理方式。", descEn: "A grazing management strategy where pastures are divided into paddocks and grazed in rotation.", category: "牧场" },
+
+      // 农场 (11 terms)
+      { chinese: "农场", pinyin: "nóng chǎng", english: "Farm", descZh: "进行作物种植和/或牲畜饲养的农业生产基本单位。", descEn: "A basic unit of agricultural production for crops and/or livestock.", category: "农场" },
+      { chinese: "耕地", pinyin: "gēng dì", english: "Arable Land / Tillage", descZh: "经过翻耕用于种植农作物的土地。", descEn: "Land that is plowed and prepared for growing crops.", category: "农场" },
+      { chinese: "轮作", pinyin: "lún zuò", english: "Crop Rotation", descZh: "在同一块地上按顺序轮换种植不同种类的作物。", descEn: "The practice of growing different crops in sequence on the same land.", category: "农场" },
+      { chinese: "灌溉", pinyin: "guàn gài", english: "Irrigation", descZh: "通过人工方式向农田补充水分的操作。", descEn: "The artificial application of water to land to assist crop growth.", category: "农场" },
+      { chinese: "肥料", pinyin: "féi liào", english: "Fertilizer", descZh: "施入土壤或植物以提供养分的天然或合成物质。", descEn: "Natural or synthetic substance added to soil to supply plant nutrients.", category: "农场" },
+      { chinese: "单一种植", pinyin: "dān yī zhòng zhí", english: "Monoculture", descZh: "在同一片土地上长期种植单一作物。", descEn: "The agricultural practice of growing a single crop species over a large area for consecutive seasons.", category: "农场" },
+      { chinese: "间作", pinyin: "jiàn zuò", english: "Intercropping", descZh: "在同一块地里成行或成带间隔种植两种或两种以上作物。", descEn: "Growing two or more crops in proximity between rows or strips.", category: "农场" },
+      { chinese: "有机农业", pinyin: "yǒu jī nóng yè", english: "Organic Farming", descZh: "遵循自然规律，不使用化学合成农药和化肥的农业体系。", descEn: "Farming system avoiding synthetic pesticides and fertilizers.", category: "农场" },
+      { chinese: "精准农业", pinyin: "jīng zhǔn nóng yè", english: "Precision Agriculture", descZh: "利用GPS、传感器等信息技术优化田间管理。", descEn: "Management strategy using GPS, sensors to optimize field operations.", category: "农场" },
+      { chinese: "可持续农业", pinyin: "kě chí xù nóng yè", english: "Sustainable Agriculture", descZh: "旨在满足当代需求而不损害后代能力的农业方式。", descEn: "Farming that meets society's present food needs without compromising future generations.", category: "农场" },
+      { chinese: "粮食安全", pinyin: "liáng shí ān quán", english: "Food Security", descZh: "确保所有人在任何时候都能获得足够、安全和有营养的食物。", descEn: "When all people have physical and economic access to sufficient, safe, nutritious food.", category: "农场" },
+
+      // 土壤 (15 terms)
+      { chinese: "土壤", pinyin: "tǔ rǎng", english: "Soil", descZh: "地球表层由矿物、有机质、水、空气组成的自然体。", descEn: "The upper layer of earth composed of minerals, organic matter, water, air.", category: "土壤" },
+      { chinese: "表土", pinyin: "biǎo tǔ", english: "Topsoil", descZh: "土壤最上层富含有机质和微生物的部分。", descEn: "The uppermost layer of soil, rich in organic matter and microorganisms.", category: "土壤" },
+      { chinese: "土壤肥力", pinyin: "tǔ rǎng féi lì", english: "Soil Fertility", descZh: "土壤提供植物生长所需养分的能力。", descEn: "The ability of soil to supply essential nutrients to plants.", category: "土壤" },
+      { chinese: "土壤板结", pinyin: "tǔ rǎng bǎn jié", english: "Soil Compaction", descZh: "土壤颗粒紧密堆积，降低孔隙度和透气性。", descEn: "Compression of soil particles, reducing pore space and aeration.", category: "土壤" },
+      { chinese: "水土流失", pinyin: "shuǐ tǔ liú shī", english: "Soil Erosion", descZh: "水或风带走地表土壤的破坏过程。", descEn: "Detachment and movement of topsoil by water or wind.", category: "土壤" },
+      { chinese: "土壤pH值", pinyin: "tǔ rǎng pH zhí", english: "Soil pH", descZh: "衡量土壤酸碱度的指标。", descEn: "A measure of the acidity or alkalinity of soil.", category: "土壤" },
+      { chinese: "固氮作用", pinyin: "gù dàn zuò yòng", english: "Nitrogen Fixation", descZh: "将大气中的惰性氮转化为植物可利用的氨或硝酸盐。", descEn: "Conversion of atmospheric nitrogen into plant‑available compounds.", category: "土壤" },
+      { chinese: "堆肥", pinyin: "duī féi", english: "Compost", descZh: "有机废弃物经微生物分解形成的稳定腐殖质肥料。", descEn: "Decayed organic material used as a soil amendment and fertilizer.", category: "土壤" },
+      { chinese: "绿肥", pinyin: "lǜ féi", english: "Green Manure", descZh: "将绿色植物翻压入土中作为肥料。", descEn: "Plants grown to be incorporated into the soil to improve fertility.", category: "土壤" },
+      { chinese: "覆盖作物", pinyin: "fù gài zuò wù", english: "Cover Crop", descZh: "为保护土壤、抑制杂草而种植的非收获作物。", descEn: "Crops planted primarily to protect and enrich the soil rather than for harvest.", category: "土壤" },
+      { chinese: "免耕农业", pinyin: "miǎn gēng nóng yè", english: "No-till Farming", descZh: "不翻动土壤，直接在前茬作物残茬上播种的耕作方式。", descEn: "Planting crops without tilling the soil, leaving residue from previous crops.", category: "土壤" },
+      { chinese: "壤土", pinyin: "rǎng tǔ", english: "Loam", descZh: "沙、粉沙和粘土比例适中的肥沃土壤混合物。", descEn: "A fertile soil mixture with balanced proportions of sand, silt, and clay.", category: "土壤" },
+      { chinese: "覆盖物", pinyin: "fù gài wù", english: "Mulch", descZh: "覆盖在土壤表面的保护层，用于保水、调温和抑制杂草。", descEn: "A protective cover placed over the soil to modify climate effects and suppress weeds.", category: "土壤" },
+      { chinese: "土壤盐碱化", pinyin: "tǔ rǎng yán jiǎn huà", english: "Soil Salinization", descZh: "土壤中可溶性盐分积累过多的现象，影响作物生长。", descEn: "The accumulation of excess soluble salts in soil, adversely affecting crop growth.", category: "土壤" },
+      { chinese: "土壤有机质", pinyin: "tǔ rǎng yǒu jī zhì", english: "Soil Organic Matter (SOM)", descZh: "土壤中处于不同分解阶段的动植物残体。", descEn: "Plant or animal residues in varying stages of decomposition in soil.", category: "土壤" },
+
+      // 作物 (14 terms)
+      { chinese: "谷物", pinyin: "gǔ wù", english: "Cereal", descZh: "禾本科粮食作物的总称，如小麦、水稻、玉米。", descEn: "Grasses cultivated for their edible grains, e.g., wheat, rice, maize.", category: "作物" },
+      { chinese: "豆科植物", pinyin: "dòu kē zhí wù", english: "Legume", descZh: "具有固氮能力的植物科，如大豆、豌豆、苜蓿。", descEn: "Plants of the family Fabaceae, many of which fix atmospheric nitrogen.", category: "作物" },
+      { chinese: "经济作物", pinyin: "jīng jì zuò wù", english: "Cash Crop", descZh: "主要为销售而非自给自足而种植的作物。", descEn: "A crop grown primarily for sale rather than for personal consumption.", category: "作物" },
+      { chinese: "主食作物", pinyin: "zhǔ shí zuò wù", english: "Staple Crop", descZh: "构成日常饮食基础并大量消费的作物。", descEn: "A crop that is eaten routinely and in large quantities as a dominant part of the diet.", category: "作物" },
+      { chinese: "转基因生物", pinyin: "zhuǎn jī yīn shēng wù", english: "GMO", descZh: "通过基因工程技术改变遗传物质的生物。", descEn: "Organism whose genetic material has been altered using genetic engineering.", category: "作物" },
+      { chinese: "杂交种", pinyin: "zá jiāo zhǒng", english: "Hybrid Seed", descZh: "由两个遗传不同的亲本杂交产生的第一代种子。", descEn: "First‑generation seed from crossing two genetically distinct parents.", category: "作物" },
+      { chinese: "传统品种", pinyin: "chuán tǒng pǐn zhǒng", english: "Heirloom Variety", descZh: "世代传承、未经现代杂交的古老作物品种。", descEn: "A traditional cultivar that has been passed down through generations without modern hybridization.", category: "作物" },
+      { chinese: "发芽率", pinyin: "fā yá lǜ", english: "Germination Rate", descZh: "种子在适宜条件下发芽的百分比。", descEn: "The percentage of seeds that sprout under optimal conditions.", category: "作物" },
+      { chinese: "光合作用", pinyin: "guāng hé zuò yòng", english: "Photosynthesis", descZh: "植物利用光能将二氧化碳和水转化为有机物并释放氧气。", descEn: "Process by which plants convert light energy into chemical energy, producing oxygen.", category: "作物" },
+      { chinese: "蒸腾作用", pinyin: "zhēng téng zuò yòng", english: "Transpiration", descZh: "水分从植物叶片以水蒸气形式散失的过程。", descEn: "The loss of water vapor from plant leaves.", category: "作物" },
+      { chinese: "农学", pinyin: "nóng xué", english: "Agronomy", descZh: "研究土壤管理和作物生产的科学。", descEn: "The science of soil management and crop production.", category: "作物" },
+      { chinese: "伴生种植", pinyin: "bàn shēng zhòng zhí", english: "Companion Planting", descZh: "将相互有益的植物种植在一起，以促进生长或防治害虫。", descEn: "Planting different crops in proximity for mutual benefit such as pest control or enhanced growth.", category: "作物" },
+      { chinese: "需冷量", pinyin: "xū lěng liàng", english: "Chill Hours", descZh: "某些果树冬季需要经历低温时数才能正常开花结果。", descEn: "The number of hours below a certain temperature required by fruit trees to break dormancy.", category: "作物" },
+      { chinese: "氮利用效率", pinyin: "dàn lì yòng xiào lǜ", english: "Nitrogen Use Efficiency (NUE)", descZh: "作物吸收利用氮肥的效率指标。", descEn: "A measure of how efficiently a crop absorbs and utilizes applied nitrogen fertilizer.", category: "作物" },
+
+      // 灌溉 (10 terms)
+      { chinese: "集水区", pinyin: "jí shuǐ qū", english: "Watershed", descZh: "汇集降水并排入共同水道的区域。", descEn: "An area of land that drains rainfall into a common waterway.", category: "灌溉" },
+      { chinese: "干旱", pinyin: "gān hàn", english: "Drought", descZh: "长期降水不足导致水资源短缺的现象。", descEn: "A prolonged period of abnormally low rainfall, leading to water shortage.", category: "灌溉" },
+      { chinese: "滴灌", pinyin: "dī guàn", english: "Drip Irrigation", descZh: "通过管道将水缓慢滴送到植物根部的高效灌溉方法。", descEn: "Method where water drips slowly to plant roots through pipes/emitters.", category: "灌溉" },
+      { chinese: "喷灌", pinyin: "pēn guàn", english: "Sprinkler Irrigation", descZh: "模拟降雨进行喷洒灌溉。", descEn: "Irrigation method that sprays water into the air like natural rainfall.", category: "灌溉" },
+      { chinese: "漫灌", pinyin: "màn guàn", english: "Flood Irrigation", descZh: "让水沿田面漫流的传统灌溉方式。", descEn: "Irrigation method where water is allowed to flow freely across fields.", category: "灌溉" },
+      { chinese: "水涝", pinyin: "shuǐ lào", english: "Waterlogging", descZh: "土壤水分过多导致根系缺氧的状况。", descEn: "Saturation of soil with water, resulting in anaerobic conditions for roots.", category: "灌溉" },
+      { chinese: "水权", pinyin: "shuǐ quán", english: "Water Rights", descZh: "个人或实体使用特定水源的法律权利。", descEn: "Legal right to use water from a specific source.", category: "灌溉" },
+      { chinese: "蒸散", pinyin: "zhēng sàn", english: "Evapotranspiration", descZh: "土壤蒸发和植物蒸腾的总耗水量。", descEn: "The combined water loss from soil evaporation and plant transpiration.", category: "灌溉" },
+      { chinese: "水分利用效率", pinyin: "shuǐ fèn lì yòng xiào lǜ", english: "Water Use Efficiency (WUE)", descZh: "单位水量所生产的作物产量。", descEn: "The amount of crop yield produced per unit of water used.", category: "灌溉" },
+      { chinese: "雨水收集", pinyin: "yǔ shuǐ shōu jí", english: "Rainwater Harvesting", descZh: "收集和储存雨水用于农业灌溉的系统。", descEn: "The collection and storage of rainwater for agricultural irrigation use.", category: "灌溉" },
+
+      // 机械 (10 terms)
+      { chinese: "拖拉机", pinyin: "tuō lā jī", english: "Tractor", descZh: "用于牵引或推动各种农具的自走式动力机械。", descEn: "Self‑propelled vehicle designed to pull or power farm implements.", category: "机械" },
+      { chinese: "联合收割机", pinyin: "lián hé shōu gē jī", english: "Combine Harvester", descZh: "能一次性完成收割、脱粒、分离和清选的机器。", descEn: "Machine that reaps, threshes, and cleans grain in one operation.", category: "机械" },
+      { chinese: "犁", pinyin: "lí", english: "Plow", descZh: "翻耕土壤的主要工具。", descEn: "A primary tillage tool used to cut, lift, and invert the soil.", category: "机械" },
+      { chinese: "播种机", pinyin: "bō zhǒng jī", english: "Seeder / Planter", descZh: "按一定行距和深度播种的机械。", descEn: "A machine that sows seeds at a controlled rate and depth.", category: "机械" },
+      { chinese: "无人机", pinyin: "wú rén jī", english: "Drone / UAV", descZh: "用于农田监测、喷洒农药或播种的无人飞行器。", descEn: "Unmanned aerial vehicle used for crop monitoring, spraying, or seeding.", category: "机械" },
+      { chinese: "卫星图像", pinyin: "wèi xīng tú xiàng", english: "Satellite Imagery", descZh: "通过卫星获取的农田遥感图像。", descEn: "Images of the earth's surface captured by satellites, used for crop monitoring.", category: "机械" },
+      { chinese: "自动转向系统", pinyin: "zì dòng zhuǎn xiàng xì tǒng", english: "Auto-steering System", descZh: "基于GPS的拖拉机自动导航系统。", descEn: "A GPS‑based system that automatically steers tractors for precise field operations.", category: "机械" },
+      { chinese: "可变速率技术", pinyin: "kě biàn sù lǜ jì shù", english: "Variable Rate Technology (VRT)", descZh: "根据农田差异调整种子、肥料等投入量的技术。", descEn: "Technology that adjusts input application rates based on field variability.", category: "机械" },
+      { chinese: "旋耕机", pinyin: "xuán gēng jī", english: "Rotary Tiller / Rotavator", descZh: "利用旋转刀片破碎和混合土壤的耕作机械。", descEn: "A machine with rotating blades that break up and mix soil.", category: "机械" },
+      { chinese: "GPS导航", pinyin: "GPS dǎo háng", english: "GPS Guidance System", descZh: "利用卫星定位实现拖拉机精准作业的导航系统。", descEn: "A satellite-based system for precise tractor navigation and field operations.", category: "机械" },
+
+      // 畜牧 (11 terms)
+      { chinese: "育种", pinyin: "yù zhǒng", english: "Breeding", descZh: "通过选择和配种来改良家畜遗传特性的科学。", descEn: "Science of selecting and mating animals to improve desired traits.", category: "畜牧" },
+      { chinese: "人工授精", pinyin: "rén gōng shòu jīng", english: "Artificial Insemination (AI)", descZh: "使用器械将精液注入母畜生殖道内使其受孕。", descEn: "Technique of introducing semen into the female reproductive tract by means other than natural mating.", category: "畜牧" },
+      { chinese: "妊娠期", pinyin: "rèn shēn qī", english: "Gestation Period", descZh: "胎儿在母体内发育的时间。", descEn: "The period of fetal development inside the mother's womb.", category: "畜牧" },
+      { chinese: "产犊/产羔", pinyin: "chǎn dú / chǎn gāo", english: "Calving / Lambing", descZh: "母牛或母羊分娩幼崽的过程。", descEn: "The act of giving birth in cattle (calving) or sheep (lambing).", category: "畜牧" },
+      { chinese: "断奶", pinyin: "duàn nǎi", english: "Weaning", descZh: "幼畜停止哺乳，逐渐转向固体饲料。", descEn: "The process of transitioning young animals from milk to solid feed.", category: "畜牧" },
+      { chinese: "体况评分", pinyin: "tǐ kuàng píng fēn", english: "Body Condition Score (BCS)", descZh: "评估牲畜脂肪和肌肉储备的主观或客观方法。", descEn: "A method to assess the fat and muscle reserves of livestock.", category: "畜牧" },
+      { chinese: "初乳", pinyin: "chū rǔ", english: "Colostrum", descZh: "母畜产后头几天分泌的富含抗体的乳汁。", descEn: "The first milk produced after birth, rich in antibodies.", category: "畜牧" },
+      { chinese: "兽医", pinyin: "shòu yī", english: "Veterinarian", descZh: "从事动物疾病防治的专业人员。", descEn: "A medical professional who treats diseases and injuries in animals.", category: "畜牧" },
+      { chinese: "生物安全", pinyin: "shēng wù ān quán", english: "Biosecurity", descZh: "防止病原体传入和在场内传播的综合管理措施。", descEn: "Measures to prevent introduction and spread of disease agents on a farm.", category: "畜牧" },
+      { chinese: "反刍动物", pinyin: "fǎn chú dòng wù", english: "Ruminant", descZh: "具有反刍消化系统的哺乳动物，如牛、绵羊、山羊。", descEn: "A mammal with a rumen digestion system, e.g., cattle, sheep, goats.", category: "畜牧" },
+      { chinese: "疫苗接种", pinyin: "yì miáo jiē zhòng", english: "Vaccination", descZh: "通过注射疫苗预防牲畜传染病的管理措施。", descEn: "The administration of vaccines to prevent infectious diseases in livestock.", category: "畜牧" },
+
+      // 加工 (9 terms)
+      { chinese: "粮仓", pinyin: "liáng cāng", english: "Granary / Silo", descZh: "专门用于储存散装谷物或饲料的设施。", descEn: "Structure for storing bulk grain or fermented feed (silage).", category: "加工" },
+      { chinese: "干燥", pinyin: "gān zào", english: "Drying", descZh: "降低农产品水分以利安全储存。", descEn: "The process of reducing moisture content in agricultural products for safe storage.", category: "加工" },
+      { chinese: "储藏", pinyin: "chǔ cáng", english: "Storage", descZh: "农产品收获后的保存管理。", descEn: "The post‑harvest management of agricultural products to maintain quality.", category: "加工" },
+      { chinese: "冷链", pinyin: "lěng liàn", english: "Cold Chain", descZh: "从生产、运输到销售全程保持低温的供应链系统。", descEn: "Temperature‑controlled supply chain from production to consumer.", category: "加工" },
+      { chinese: "附加值", pinyin: "fù jiā zhí", english: "Value-added", descZh: "通过加工提高农产品的经济价值。", descEn: "The increase in the value of a product through processing or packaging.", category: "加工" },
+      { chinese: "碾磨", pinyin: "niǎn mò", english: "Milling", descZh: "将谷物研磨成粉或去壳的过程。", descEn: "The mechanical process of grinding grains into flour or removing hulls.", category: "加工" },
+      { chinese: "屠宰场", pinyin: "tú zǎi chǎng", english: "Slaughterhouse / Abattoir", descZh: "集中宰杀和初步加工牲畜的场所。", descEn: "A facility where livestock are slaughtered and processed for meat.", category: "加工" },
+      { chinese: "青贮", pinyin: "qīng zhù", english: "Silage", descZh: "通过厌氧发酵保存的青绿饲料。", descEn: "Fermented, high-moisture stored fodder used to feed livestock.", category: "加工" },
+      { chinese: "气调储藏", pinyin: "qì tiáo chǔ cáng", english: "Controlled Atmosphere Storage", descZh: "通过调节储存环境的气体成分来延长农产品保鲜期的技术。", descEn: "A storage technique that adjusts gas composition to extend produce shelf life.", category: "加工" },
+
+      // 经济 (12 terms)
+      { chinese: "产量", pinyin: "chǎn liàng", english: "Yield", descZh: "单位面积土地或每头牲畜的平均产出量。", descEn: "The amount of agricultural product harvested per unit of land or per animal.", category: "经济" },
+      { chinese: "收成", pinyin: "shōu cheng", english: "Harvest", descZh: "收获的农产品；也指收获这一行为。", descEn: "The gathered agricultural products; also the act of gathering them.", category: "经济" },
+      { chinese: "补贴", pinyin: "bǔ tiē", english: "Subsidy", descZh: "政府为稳定农业收入或鼓励生产而提供的财政支持。", descEn: "Government financial support to stabilize farm incomes or encourage production.", category: "经济" },
+      { chinese: "供应链", pinyin: "gōng yìng liàn", english: "Supply Chain", descZh: "农产品从田间到消费者餐桌所经历的全过程。", descEn: "The sequence of processes involved in the production and distribution of agricultural goods.", category: "经济" },
+      { chinese: "期货", pinyin: "qī huò", english: "Futures", descZh: "约定在未来特定时间以特定价格买卖农产品的标准化合约。", descEn: "Standardized contract to buy/sell a commodity at a future date and price.", category: "经济" },
+      { chinese: "农业合作社", pinyin: "nóng yè hé zuò shè", english: "Agricultural Cooperative", descZh: "农民自愿联合、共同经营和分享收益的组织。", descEn: "Organization owned and operated by farmers for mutual benefit.", category: "经济" },
+      { chinese: "大宗商品", pinyin: "dà zōng shāng pǐn", english: "Commodity", descZh: "可互换的、批量交易的初级农产品，如小麦、玉米。", descEn: "A basic agricultural product that is interchangeable with other goods of the same type.", category: "经济" },
+      { chinese: "关税", pinyin: "guān shuì", english: "Tariff", descZh: "政府对进口农产品征收的税。", descEn: "A tax imposed on imported agricultural goods.", category: "经济" },
+      { chinese: "农民市场", pinyin: "nóng mín shì chǎng", english: "Farmers' Market", descZh: "农民直接向消费者销售农产品的场所。", descEn: "A venue where farmers sell their products directly to consumers.", category: "经济" },
+      { chinese: "社区支持农业", pinyin: "shè qū zhī chí nóng yè", english: "Community Supported Agriculture (CSA)", descZh: "消费者提前支付费用，与农民分担风险并分享收成。", descEn: "System where consumers buy shares of a farm's harvest in advance.", category: "经济" },
+      { chinese: "农业经济学", pinyin: "nóng yè jīng jì xué", english: "Agricultural Economics", descZh: "将经济理论应用于农业生产和分配优化的学科。", descEn: "A branch of economics applying economic theory to optimize agricultural production and distribution.", category: "经济" },
+      { chinese: "农产品营销", pinyin: "nóng chǎn pǐn yíng xiāo", english: "Agricultural Marketing", descZh: "农产品从农场到消费者的流通和销售全过程。", descEn: "The entire process of moving agricultural products from farm to consumer, including selling and promotion.", category: "经济" },
+
+      // 植物保护 (6 terms)
+      { chinese: "杀虫剂", pinyin: "shā chóng jì", english: "Insecticide", descZh: "用于杀死或驱除害虫的化学物质。", descEn: "Any chemical substance used to kill, harm, or repel unwanted insects.", category: "植物保护" },
+      { chinese: "除草剂", pinyin: "chú cǎo jì", english: "Herbicide", descZh: "用于杀死或抑制杂草生长的化学物质。", descEn: "A chemical substance used to kill or inhibit the growth of unwanted plants (weeds).", category: "植物保护" },
+      { chinese: "杀菌剂", pinyin: "shā jūn jì", english: "Fungicide", descZh: "用于防治真菌病害的化学物质。", descEn: "A chemical substance used to prevent or kill fungal pathogens on crops.", category: "植物保护" },
+      { chinese: "杀螨剂", pinyin: "shā mǎn jì", english: "Acaricide / Miticide", descZh: "专门用于杀死螨类（如红蜘蛛）的农药。", descEn: "A pesticide formulated specifically to kill, harm, repel, or mitigate one or more species of mites.", category: "植物保护" },
+      { chinese: "综合病虫害管理", pinyin: "zōng hé bìng chóng hài guǎn lǐ", english: "Integrated Pest Management (IPM)", descZh: "利用多种方法综合防治病虫害的策略，兼顾经济阈值和环境影响。", descEn: "A broad interdisciplinary approach using multiple methods to minimize pest effects, considering economic thresholds and environmental impact.", category: "植物保护" },
+      { chinese: "寄主", pinyin: "jì zhǔ", english: "Host", descZh: "被害虫或病原体寄生的植物或动物。", descEn: "A plant or animal that sustains a pest or pathogen.", category: "植物保护" },
+
+      // 可持续农业 (6 terms)
+      { chinese: "再生农业", pinyin: "zài shēng nóng yè", english: "Regenerative Agriculture", descZh: "通过恢复土壤健康、增加生物多样性来改善生态系统的农业方式。", descEn: "A farming approach that focuses on restoring soil health and increasing biodiversity to improve ecosystems.", category: "可持续农业" },
+      { chinese: "农业生态学", pinyin: "nóng yè shēng tài xué", english: "Agroecology", descZh: "将生态学原理应用于农业系统设计的学科。", descEn: "The application of ecological principles to the design and management of agricultural systems.", category: "可持续农业" },
+      { chinese: "碳封存", pinyin: "tàn fēng cún", english: "Carbon Sequestration", descZh: "通过农业实践（如免耕、覆盖作物）将大气中的碳固定在土壤中。", descEn: "The process of capturing and storing atmospheric carbon in soil through agricultural practices.", category: "可持续农业" },
+      { chinese: "有益管理实践", pinyin: "yǒu yì guǎn lǐ shí jiàn", english: "Beneficial Management Practices (BMPs)", descZh: "旨在优化农业生产同时保护土壤和水资源的可持续管理方法。", descEn: "Sustainable management methods that aim to optimize crop yield and quality while protecting soil and water.", category: "可持续农业" },
+      { chinese: "保墒", pinyin: "bǎo shāng", english: "Soil Moisture Conservation", descZh: "通过覆盖、少耕等方法保持土壤水分的农业技术。", descEn: "Techniques to retain soil moisture through mulching, reduced tillage, etc.", category: "可持续农业" },
+      { chinese: "农林复合经营", pinyin: "nóng lín fù hé jīng yíng", english: "Agroforestry", descZh: "将树木与农作物或牲畜在同一土地上结合经营的系统。", descEn: "A land-use system where trees are combined with crops and/or livestock on the same land.", category: "可持续农业" },
+
+      // 水产养殖 (4 terms)
+      { chinese: "水产养殖", pinyin: "shuǐ chǎn yǎng zhí", english: "Aquaculture", descZh: "在受控条件下养殖水生生物（鱼、虾、贝、藻等）。", descEn: "The farming of aquatic organisms under controlled conditions.", category: "水产养殖" },
+      { chinese: "鱼菜共生", pinyin: "yú cài gòng shēng", english: "Aquaponics", descZh: "将水产养殖与水耕栽培结合的循环生态系统。", descEn: "A system combining aquaculture with hydroponics in a symbiotic environment.", category: "水产养殖" },
+      { chinese: "水耕栽培", pinyin: "shuǐ gēng zāi péi", english: "Hydroponics", descZh: "不使用土壤，利用营养液在溶液中种植植物的方法。", descEn: "A method of growing plants without soil, using mineral nutrient solutions.", category: "水产养殖" },
+      { chinese: "混养", pinyin: "hùn yǎng", english: "Polyculture", descZh: "在同一水体中同时养殖多个物种以提高生态效率。", descEn: "Raising multiple species together in the same water body to improve ecological efficiency.", category: "水产养殖" }
+    ];
+
+    // DOM elements
+    const container = document.getElementById('termsContainer');
+    const searchInput = document.getElementById('searchInput');
+    const clearBtn = document.getElementById('clearSearchBtn');
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const categoryDescDiv = document.getElementById('categoryDescription');
+
+    let activeCategory = 'all';
+    let searchTerm = '';
+
+    function updateCategoryDescription() {
+      const desc = categoryDescriptions[activeCategory] || categoryDescriptions.all;
+      categoryDescDiv.innerHTML = `<span class="desc-chinese">${desc.zh}</span> <span class="desc-english">${desc.en}</span>`;
+    }
+
+    function renderTerms() {
+      const filtered = agriculturalTerms.filter(term => {
+        if (activeCategory !== 'all' && term.category !== activeCategory) return false;
+        if (searchTerm.trim() !== '') {
+          const s = searchTerm.trim().toLowerCase();
+          return (
+            term.chinese.includes(searchTerm.trim()) ||
+            term.pinyin.toLowerCase().includes(s) ||
+            term.english.toLowerCase().includes(s) ||
+            term.descZh.includes(searchTerm.trim()) ||
+            term.descEn.toLowerCase().includes(s)
+          );
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="no-results">🌾 没有找到匹配的术语，试试其他关键词。No matching terms found.</div>`;
+        return;
+      }
+
+      let html = '';
+      filtered.forEach(term => {
+        html += `
+          <div class="term-card">
+            <div class="term-header">
+              <div class="chinese-block">
+                <span class="chinese-term">${term.chinese}</span>
+                <span class="pinyin-text">${term.pinyin}</span>
+              </div>
+              <span class="english-term">${term.english}</span>
+              <span class="category-badge">${term.category}</span>
+            </div>
+            <div class="descriptions">
+              <div class="desc-zh">📖 ${term.descZh}</div>
+              <div class="desc-en">${term.descEn}</div>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function updateCategoryButtons() {
+      categoryButtons.forEach(btn => {
+        const cat = btn.getAttribute('data-category');
+        btn.classList.toggle('active', cat === activeCategory);
+      });
+    }
+
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const category = this.getAttribute('data-category');
+        if (activeCategory === category) return;
+        activeCategory = category;
+        updateCategoryButtons();
+        updateCategoryDescription();
+        renderTerms();
+      });
+    });
+
+    searchInput.addEventListener('input', function(e) {
+      searchTerm = e.target.value;
+      renderTerms();
+    });
+
+    clearBtn.addEventListener('click', function() {
+      searchInput.value = '';
+      searchTerm = '';
+      renderTerms();
+      searchInput.focus();
+    });
+
+    // Initial render
+    updateCategoryDescription();
+    renderTerms();
+  })();
+</script>
+</body>
+</html>
